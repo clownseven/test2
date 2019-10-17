@@ -13,7 +13,7 @@
     <url-pattern>/first</url-pattern>
     </servlet-mappint>
     <welcom-file-list>
-    <welcom-file>first.jsp</welcom-file>
+    <welcom-file>index.jsp</welcom-file>
     </welcom-file-list>
 
 </web-app>
