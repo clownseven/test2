@@ -2,7 +2,7 @@
 <%@ page import="java.sql.*"%>
 <html>
 <head>
-<title>www.michaelweb.com</title>
+<title>verify index</title>
 </head>
 <body>
 	<%!
@@ -17,19 +17,24 @@
 		ResultSet rs = null;
 		boolean flag = false;
 		String name = null;
+		/* out.println("aaaaaaaaaaa"); */
 	%>
+	
 	<%
 		try {
 			Class.forName(DBDRIVER);
 			conn = DriverManager.getConnection(DBURL, DBUSER, DBPASS);
-			String sql = "SELECT name FROM user WHERE name=? AND password=?";
+			 String sql = "SELECT * FROM user WHERE name=? AND password=?"; 
+
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, request.getParameter("name"));
-			pstmt.setString(2, request.getParameter("password"));
+			/* out.print(request.getParameter("name")); */
+			pstmt.setString(2, request.getParameter("password")); 
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
 				name = rs.getString(1);
+				/* System.out.println("AAAAAAAAAAAA"); */
 				out.print(name);
 				flag = true;
 			}
@@ -43,17 +48,15 @@
 			} catch (Exception e) {
 			}
 		}
-	%>
+	%> 
 	<%
 		if (flag) {
 	%>
-	<jsp:forward page="validate.jsp">
-		<jsp:param name="name" value="<%=name%>" />
-	</jsp:forward>
+	<jsp:forward page="index2.jsp"/>
 	<%
 		} else {
 	%>
-	<jsp:forward page="first.jsp" />
+	<jsp:forward page="back.jsp" />
 	<%
 		}
 	%>
